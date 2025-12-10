@@ -5,7 +5,7 @@ function App() {
   const [weather, setWeather] = useState()
   const [estado, setEstado] = useState()
   const [lugar, setLugar] = useState('')
-  const key = process.env.REACT_APP_API_KEY
+  const key = import.meta.env.VITE_API_KEY
 
   const language = 'pt'
   
