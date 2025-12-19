@@ -47,7 +47,8 @@ main{
   flex-direction: column;
   padding: 20px;
   color: aliceblue;
-  background-color: rgb(8, 102, 108);
+  background-color: rgb(18, 128, 136);
+  box-shadow: 7px 7px 4px 2px #413f3f;
   justify-content: center;
   align-items: center;
 }
@@ -59,13 +60,40 @@ main{
   font-weight: 800;
 }
 .loc{
-  font-size: 1.3rem;
+  
+  font-size: 1.7rem;
 }
+
 .location{
   display: flex;
   align-items: center;
+  margin-top:auto;
   gap: 10px;
 }
 .weather{
-  font-size: 3rem;
+  font-size: 2.4rem;
+}
+.outrasInfo-cont{
+  padding: 20px;
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.weather-icon{
+  margin-top: 40px;
+}
+
+.wind,.umidade{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.1rem;
+}
+.wind,.umidade > p{
+  font-size: 1.1rem;
+}
+.w,.u{
+  font-size: 2.5rem;
 }

@@ -10,7 +10,8 @@ function App() {
   const language = 'pt'
   
   React.useEffect( () => {
-    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${lugar}&limit=3&appid=${key}&lang=${language}`)
+    if (lugar !== ''){
+      fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${lugar}&limit=3&appid=${key}&lang=${language}`)
       .then( resp => resp.json())
       .then( data  => {
         setEstado(data)
@@ -22,7 +23,7 @@ function App() {
           setWeather(data2)
         })
       })
-      
+    }
   },[lugar])
 
   function searchWeather(formData){
@@ -43,8 +44,9 @@ function App() {
       {weather && <section className='clima'>
         <div className='clima-content'>
             <div className='location'>
-              <span className='loc'>{weather.name}, {estado[0].state}</span>
+              <span className='loc'>{weather.name} </span>
               <span className='country'>{weather.sys.country}</span>
+              
             </div>
               
               <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} 
@@ -53,8 +55,17 @@ function App() {
               <h1 className='weather'>{weather.main.temp} °C</h1>
             </div>
             <div className='outrasInfo-cont'>
-              <span>{weather.main.humidity}</span>
-              <span>{weather.wind.speed}</span>
+              <div className='umidade'>
+                <span className="material-symbols-outlined u" >water</span> 
+                <p>{weather.main.humidity}%</p>
+              </div>
+              
+              <div className='wind'>
+                
+                <span className="material-symbols-outlined w">air</span>
+                <p> {weather.wind.speed} km/h</p>
+              </div>
+              
             </div>
         </div>
         
