@@ -17,7 +17,7 @@ main{
   display: flex;
   width: 500px;
   border-radius: 5px;
-  gap: 10px;
+  gap: 5px;
   align-items: center;
   justify-content: center;
   color: aliceblue;
@@ -25,13 +25,13 @@ main{
 .clima-search > form > input {
   border: 1px solid #333;
   border-radius: 5px;
-  padding: 6px;
+  padding: 8px;
 }
    
 .s{
   color: rgb(249, 249, 249);
-  padding: 6px;
-  border-radius: 50%;
+  padding: 4.5px;
+  border-radius: 4px;
   background-color: rgb(62, 61, 61);
   cursor: pointer;
 }
@@ -66,5 +66,6 @@ main{
   align-items: center;
   gap: 10px;
 }
-.weather-icon{
+.weather{
+  font-size: 3rem;
 }

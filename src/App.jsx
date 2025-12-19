@@ -10,7 +10,7 @@ function App() {
   const language = 'pt'
   
   React.useEffect( () => {
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${lugar}&limit=3&appid=${key}&lang=${language}`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${lugar}&limit=3&appid=${key}&lang=${language}`)
       .then( resp => resp.json())
       .then( data  => {
         setEstado(data)
@@ -27,8 +27,7 @@ function App() {
 
   function searchWeather(formData){
     const input = formData.get('lugar')
-    setLugar( prev => prev = input)
-    console.log(lugar)
+    setLugar(input)
   }
   return (
    
@@ -48,10 +47,14 @@ function App() {
               <span className='country'>{weather.sys.country}</span>
             </div>
               
-            <div>
               <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} 
               className='weather-icon'></img> 
-              <h1>{weather.main.temp} °C</h1>
+            <div>
+              <h1 className='weather'>{weather.main.temp} °C</h1>
+            </div>
+            <div className='outrasInfo-cont'>
+              <span>{weather.main.humidity}</span>
+              <span>{weather.wind.speed}</span>
             </div>
         </div>
         
