@@ -12,10 +12,31 @@ main{
   align-items: center;
   
 }
+.container{
+  margin-top: 50px;
+  background-color:  rgb(59, 158, 185);
+  border-radius: 10px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 5px 5px 0px 1px rgb(24, 83, 100);
+}
+form{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ gap:5px;
+}
+
+form > button{
+  border: none;
+  background-color:rgb(59, 158, 185) ;
+}
 .clima-search{
   padding: 20px;
   display: flex;
-  width: 500px;
+  width: 550px;
   border-radius: 5px;
   gap: 5px;
   align-items: center;
@@ -23,17 +44,23 @@ main{
   color: aliceblue;
 }
 .clima-search > form > input {
-  border: 1px solid #333;
+  border: none;
+  width: 250px;
+  border: 0px solid #333;
   border-radius: 5px;
-  padding: 8px;
+  padding: 9px;
 }
    
 .s{
   color: rgb(249, 249, 249);
   padding: 4.5px;
-  border-radius: 4px;
+  
   background-color: rgb(62, 61, 61);
   cursor: pointer;
+  background-color: rgb(46, 133, 157);
+  border-radius: 5px;
+  box-shadow: 2px 3px 0px 1px rgb(24, 83, 100);
+  padding: 5px;
 }
 .clima{
   display: flex;
@@ -41,14 +68,14 @@ main{
 }
 .clima-content{
   width: 350px;
-  height: 450px;
+  height: 420px;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
   padding: 20px;
   color: aliceblue;
-  background-color: rgb(18, 128, 136);
-  box-shadow: 7px 7px 4px 2px #413f3f;
+  background-color: rgb(59, 158, 185);
+  
   justify-content: center;
   align-items: center;
 }
@@ -57,21 +84,37 @@ main{
   background-color: aliceblue;
   color: rgb(60, 60, 60);
   border-radius: 5px;
-  font-weight: 800;
+  font-size: 0.6rem;
+  font-weight: 600;
 }
 .loc{
-  
   font-size: 1.7rem;
 }
-
+.estado{
+  margin-top: 5px;
+  font-size: 1.2rem;
+}
 .location{
   display: flex;
   align-items: center;
-  margin-top:auto;
+  margin-top: 20px;
   gap: 10px;
+ 
 }
 .weather{
+  display: flex;
+  flex-direction: column;
   font-size: 2.4rem;
+  background-color: rgb(46, 133, 157);
+  border-radius: 5px;
+  box-shadow: 2px 3px 0px 1px rgb(24, 83, 100);
+  padding: 7px 20px 7px 20px;
+  gap: 20px;
+}
+
+.min-max{
+  display: flex;
+  justify-content: space-between;
 }
 .outrasInfo-cont{
   padding: 20px;
@@ -82,18 +125,33 @@ main{
   justify-content: space-between;
 }
 .weather-icon{
-  margin-top: 40px;
+  
+  margin-top: auto;
 }
 
 .wind,.umidade{
+  padding: 5px;
   display: flex;
   align-items: center;
   gap: 5px;
   font-size: 1.1rem;
+  transition: 0.3s;
+
 }
 .wind,.umidade > p{
   font-size: 1.1rem;
+  font-weight: 600;
+  
 }
+.umidade:hover{
+  scale: 1.2;
+  box-sizing: 2px 2px 2px 2px darkgrey;
+}
+.wind:hover{
+  scale: 1.2;
+  box-sizing: 2px 2px 2px 2px darkgrey;
+}
+
 .w,.u{
   font-size: 2.5rem;
 }
