@@ -11,20 +11,33 @@ function App() {
 
   
   React.useEffect( () => {
-    if(lugar !== ''){
-      fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${lugar}&limit=3&appid=${key}&lang=${language}`)
-      .then( resp => resp.json())
-      .then( data  => {
+    async function getWeather(){
+      if(lugar !== ''){
+        try{
+          const resp = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${lugar}&limit=3&appid=${key}&lang=${language}`)
+          console.log(resp)
+          const data = await resp.json()
+      if (!data || data.length === 0){
+        throw new Error('Cidade não encontrada')
+      }
         setEstado(data)
         console.log(data)
-        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=${key}&units=metric`)
-          .then( resp => resp.json())
-          .then( data2 => {
-          console.log(data2)
-          setWeather(data2)
-        })
-      })
+
+     const secondRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=${key}&units=metric`)
+     const data2 = await secondRes.json()
+        console.log(data2)
+        setWeather(data2)
+        }
+      catch(error){
+        console.log(error)
+        setWeather(null)
+        setEstado(null)
+      }
+      
+      }
     }
+    getWeather()
+
   },[lugar])
 
   function searchWeather(event){
@@ -50,6 +63,11 @@ function App() {
           </button>
         </form>
        
+      { weather === null ? <div className='erro'>
+        <h1>CIDADE NÃO ENCONTRADA...</h1> 
+        <p>Verifique se a cidade está escrita corretamente</p>
+      </div>
+      : null }
       </div>
       
       {weather && <section className='clima'>
@@ -70,13 +88,19 @@ function App() {
             <div className='outrasInfo-cont'>
              
               <div className='umidade'>
-                <span className="material-symbols-outlined u" >water</span> 
-                <p>{weather.main.humidity}%</p>
+                <div className='data'> 
+                  <span className="material-symbols-outlined u" >water</span> 
+                  <p>{weather.main.humidity}%</p>
+                </div> 
+                <p className='about'>Umidade</p>
               </div>
               
               <div className='wind'>
-                <span className="material-symbols-outlined w">air</span>
-                <p> {weather.wind.speed} km/h</p>
+                <div className='data'>  
+                  <span className="material-symbols-outlined w">air</span>
+                  <p> {weather.wind.speed} <span className='km'>km/h</span></p>
+                </div>
+                <p className='about'>Vento</p>
               </div>
               
             </div>
