@@ -1,37 +1,40 @@
-import React, {useState} from 'react';
+import {useState, useEffect} from 'react';
+import { MoonLoader } from 'react-spinners'
 
 function App() {
 
   const [weather, setWeather] = useState()
   const [estado, setEstado] = useState()
   const [lugar, setLugar] = useState('')
+  const [loading,setLoading] = useState(false)
+
   const key = import.meta.env.VITE_API_KEY
 
   const language = 'pt'
 
   
-  React.useEffect( () => {
+  useEffect( () => {
     async function getWeather(){
+      
       if(lugar !== ''){
         try{
           const resp = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${lugar}&limit=3&appid=${key}&lang=${language}`)
-          console.log(resp)
           const data = await resp.json()
+          setLoading(true)
       if (!data || data.length === 0){
         throw new Error('Cidade não encontrada')
       }
         setEstado(data)
-        console.log(data)
-
-     const secondRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=${key}&units=metric`)
-     const data2 = await secondRes.json()
-        console.log(data2)
+        const secondRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=${key}&units=metric`)
+        const data2 = await secondRes.json()
         setWeather(data2)
+        setLoading(false)
         }
       catch(error){
         console.log(error)
         setWeather(null)
         setEstado(null)
+        setLoading(false)
       }
       
       }
@@ -61,11 +64,20 @@ function App() {
           <span className="material-symbols-outlined s">search</span>
 
           </button>
+          
         </form>
-       
+        
+        <MoonLoader
+              color="#ffffff"
+              speedMultiplier={0.7}
+              size={40}
+              loading={loading}
+            />
+
       { weather === null ? <div className='erro'>
-        <h1>CIDADE NÃO ENCONTRADA...</h1> 
-        <p>Verifique se a cidade está escrita corretamente</p>
+        <span className="material-symbols-outlined">cloud_alert</span>
+        <h1>CIDADE NÃO ENCONTRADA</h1> 
+        <p>Verifique se a cidade está escrita corretamente.</p>
       </div>
       : null }
       </div>
@@ -109,7 +121,9 @@ function App() {
         
         
         </section>}
+        
         </div>
+       
     </main>
   )
 }
